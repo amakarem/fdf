@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 17:36:29 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/05 21:11:01 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/05 23:40:11 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	error_exit(const char *msg)
 	exit(127);
 }
 
-void	free_and_exit(const char *msg, t_pixel **pixels)
+void	free_and_exit(const char *msg, t_screen *screen)
 {
-	freepixels(pixels);
+	freepixels(screen);
 	error_exit(msg);
 }
 

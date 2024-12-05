@@ -6,13 +6,14 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/05 21:14:43 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/06 00:21:01 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+# include "mlx/mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <errno.h>
@@ -20,7 +21,7 @@
 # include "libft/libft.h"
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 1024
 # endif
 
 typedef struct s_pixel
@@ -32,12 +33,25 @@ typedef struct s_pixel
 	struct s_pixel	*next;
 }	t_pixel;
 
-char	*get_next_line(int fd);
-void	error_exit(const char *msg);
-void	free_and_exit(const char *msg, t_pixel **pixels);
-void	free_arr(char **str);
-void	set_pixel(t_pixel **pixels, int v, int h, int set, char *color);
-void	freepixels(t_pixel **pixel);
-void	printpixels(t_pixel **pixel);
+typedef struct s_screen
+{
+	t_pixel	*top;
+	int		size;
+}	t_screen;
+
+typedef struct	s_vars
+{
+	void	*mlx;
+	void	*win;
+}	t_vars;
+
+char		*get_next_line(int fd);
+void		error_exit(const char *msg);
+void		free_and_exit(const char *msg, t_screen *scree);
+void		free_arr(char **str);
+t_screen	*init_screen(void);
+void		set_pixel(t_screen *screen, int v, int h, int set, char *color);
+void		freepixels(t_screen *screen);
+void		printpixels(t_screen *screen);
 
 #endif

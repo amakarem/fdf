@@ -6,75 +6,74 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:12:30 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/05 21:20:53 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/06 00:08:45 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
-t_pixel	*lastpixel(t_pixel *lst)
+t_screen	*init_screen(void)
 {
-	t_pixel	*last;
+	t_screen	*screen;
 
-	if (!lst)
+	screen = malloc(sizeof(t_screen));
+	if (!screen)
 		return (NULL);
-	last = lst;
-	while (last->next != NULL)
-		last = last->next;
-	return (last);
+	screen->top = NULL;
+	return (screen);
 }
 
-void	pixeladd_back(t_pixel **pixels, t_pixel *new)
-{
-	t_pixel	*tmp;
-
-	tmp = lastpixel(*pixels);
-	if (tmp)
-		tmp->next = new;
-	else
-		*pixels = new;
-}
-
-void	set_pixel(t_pixel **pixels, int v, int h, int set, char *color)
+void	set_pixel(t_screen *screen, int v, int h, int set, char *color)
 {
 	t_pixel	*new_pixel;
+	t_pixel	*current;
 
 	new_pixel = malloc(sizeof(t_pixel));
 	if (!new_pixel)
-		free_and_exit("Memory error", pixels);
+		free_and_exit("Memory error", screen);
 	new_pixel->v = v;
 	new_pixel->h = h;
 	new_pixel->set = set;
 	new_pixel->color = ft_strdup(color);
 	if (!new_pixel->color)
 	{
-		free(new_pixel);
-		free_and_exit("Memory error", pixels);
+		return (free(new_pixel), free_and_exit("Memory error", screen));
 	}
 	new_pixel->next = NULL;
-	pixeladd_back(pixels, new_pixel);
+	if (screen->size == 0)
+		screen->top = new_pixel;
+	else
+	{
+		current = screen->top;
+		while (current->next != NULL)
+			current = current->next;
+		current->next = new_pixel;
+	}
+	screen->size++;
 }
 
-void	freepixels(t_pixel **pixel)
+void	freepixels(t_screen *screen)
 {
 	t_pixel	*tmp;
 
-	while (*pixel)
+	while (screen->top)
 	{
-		tmp = (*pixel)->next;
-		free(*pixel);
-		*pixel = tmp;
+		tmp = screen->top;
+		screen->top = tmp->next;
+		free(tmp);
 	}
-	free(*pixel);
-	*pixel = NULL;
+	free(screen);
 }
 
-void	printpixels(t_pixel **pixel)
+void	printpixels(t_screen *screen)
 {
-	while (*pixel)
+	t_pixel	*x;
+
+	x = screen->top;
+	while (x)
 	{
-		printf("\nV:%i H:%i SET:%i COLOR:%s", (*pixel)->v, (*pixel)->h, (*pixel)->set, (*pixel)->color);
-		*pixel = (*pixel)->next;
+		printf("\nV:%i H:%i SET:%i COLOR:%s", x->v, x->h, x->set, x->color);
+		x = x->next;
 	}
 }
