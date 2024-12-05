@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   exit_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 17:36:08 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/05 17:25:41 by aelaaser         ###   ########.fr       */
+/*   Created: 2024/10/21 17:36:29 by aelaaser          #+#    #+#             */
+/*   Updated: 2024/12/05 21:11:01 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "fdf.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include "libft/libft.h"
+void	error_exit(const char *msg)
+{
+	if (ft_strlen(msg) == 0)
+		msg = strerror(errno);
+	write(STDERR_FILENO, msg, ft_strlen(msg));
+	write(STDERR_FILENO, "\n", 1);
+	exit(127);
+}
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
+void	free_and_exit(const char *msg, t_pixel **pixels)
+{
+	freepixels(pixels);
+	error_exit(msg);
+}
 
-char	*get_next_line(int fd);
-void	error_exit(const char *msg);
+void	free_arr(char **str)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		str[i] = NULL;
+		i++;
+	}
+	free(str);
+}

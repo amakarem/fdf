@@ -6,11 +6,11 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 17:35:44 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/10/23 19:05:13 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/05 21:09:39 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "fdf.h"
 
 static char	*free_and_return_null(char *buffer, char *str)
 {
