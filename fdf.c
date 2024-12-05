@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/05 21:23:50 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/05 21:26:45 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	save_pixels(t_pixel **pixels, char *line, int v)
 		if (set[1])
 			set_pixel(pixels, v, i++, ft_atoi(set[0]), set[1]);
 		else
-			set_pixel(pixels, v, i++, ft_atoi(set[0]), "FFFFFF");
+			set_pixel(pixels, v, i++, ft_atoi(set[0]), "0x90EE90");
 		free_arr(set);
 		if (!pixels)
 			free_and_exit("Memory error", pixels);
