@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:12:30 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/05 21:14:19 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/05 21:20:53 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	set_pixel(t_pixel **pixels, int v, int h, int set, char *color)
 	if (!new_pixel->color)
 	{
 		free(new_pixel);
-    	free_and_exit("Memory error", pixels);
+		free_and_exit("Memory error", pixels);
 	}
 	new_pixel->next = NULL;
 	pixeladd_back(pixels, new_pixel);
@@ -74,7 +74,7 @@ void	printpixels(t_pixel **pixel)
 {
 	while (*pixel)
 	{
-		printf("\nV:%i H:%i SET:%i COLOR:%s |\n", (*pixel)->v, (*pixel)->h,(*pixel)->set, (*pixel)->color);
+		printf("\nV:%i H:%i SET:%i COLOR:%s", (*pixel)->v, (*pixel)->h, (*pixel)->set, (*pixel)->color);
 		*pixel = (*pixel)->next;
 	}
 }
