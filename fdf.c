@@ -6,11 +6,12 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/05 17:39:13 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:07:23 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "fdf.h"
 #include <fcntl.h>
 #include <stdio.h>
 
