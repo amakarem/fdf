@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/06 17:54:03 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/06 19:28:40 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	save_pixels(t_screen *screen, char *line, int v)
 		set = ft_split(arr[i[0]], ',');
 		i[1] = ft_atoi(set[0]);
 		if (set[1])
-			set_pixel(screen, v, i, set[1]);
+			set_pixel(screen, v, i, ft_atoi(set[1]));
 		else
-			set_pixel(screen, v, i, "0x90EE90");
+			set_pixel(screen, v, i, 0x90EE90);
 		i[0]++;
 		free_arr(set);
 		if (!screen)
@@ -77,10 +77,17 @@ int	close_window(int keycode, t_vars *vars)
 	return (0);
 }
 
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
 int	main(int argc, char **argv)
 {
 	t_screen	*screen;
-	t_vars		vars;
 
 	if (argc != 2)
 		error_exit("Usage : ./fdf <filename> [ case_size z_size ]");
@@ -89,11 +96,7 @@ int	main(int argc, char **argv)
 		error_exit("Can't allocate memory");
 	load_map(screen, argv[1]);
 	printpixels(screen);
+	drowpixels(screen, argv[1]);
 	freepixels(screen);
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, argv[1]);
-	mlx_key_hook(vars.win, close_window, &vars);
-	mlx_hook(vars.win, 17, 0, close_window, &vars);
-	mlx_loop(vars.mlx);
 	return (0);
 }
