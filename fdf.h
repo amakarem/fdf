@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/06 00:21:01 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:55:09 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		error_exit(const char *msg);
 void		free_and_exit(const char *msg, t_screen *scree);
 void		free_arr(char **str);
 t_screen	*init_screen(void);
-void		set_pixel(t_screen *screen, int v, int h, int set, char *color);
+void		set_pixel(t_screen *screen, int v, int hset[2], char *color);
 void		freepixels(t_screen *screen);
 void		printpixels(t_screen *screen);
 

@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/06 00:38:35 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:54:03 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,21 @@ void	save_pixels(t_screen *screen, char *line, int v)
 {
 	char	**arr;
 	char	**set;
-	int		i;
+	int		i[2];
 
 	arr = ft_split(line, ' ');
 	if (!arr)
 		free_and_exit("Memory error", screen);
-	i = 0;
-	while (arr[i])
+	i[0] = 0;
+	while (arr[i[0]])
 	{
-		set = ft_split(arr[i], ',');
+		set = ft_split(arr[i[0]], ',');
+		i[1] = ft_atoi(set[0]);
 		if (set[1])
-			set_pixel(screen, v, i++, ft_atoi(set[0]), set[1]);
+			set_pixel(screen, v, i, set[1]);
 		else
-			set_pixel(screen, v, i++, ft_atoi(set[0]), "0x90EE90");
+			set_pixel(screen, v, i, "0x90EE90");
+		i[0]++;
 		free_arr(set);
 		if (!screen)
 			free_and_exit("Memory error", screen);
