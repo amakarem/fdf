@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:12:30 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/06 19:28:03 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/06 19:44:50 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,9 @@ void	drowpixels(t_screen *screen, char *title)
 	pix = screen->top;
 	while (pix)
 	{
-		my_mlx_pixel_put(&img, pix->v, pix->h, pix->color);
-		mlx_put_image_to_window(vars.mlx, vars.win, img.img, pix->set, pix->h);
+		//mlx_pixel_put(&vars.mlx, vars.win, pix->v, pix->h, pix->color);
+		my_mlx_pixel_put(&img, pix->v, pix->h, 0x00FF0000);
+		mlx_put_image_to_window(vars.mlx, vars.win, img.img, pix->v, pix->h);
 		pix = pix->next;
 	}
 	mlx_key_hook(vars.win, close_window, &vars);
