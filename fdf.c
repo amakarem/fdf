@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/06 19:32:08 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:19:38 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,6 @@ int	close_window(int keycode, t_vars *vars)
 	return (0);
 }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
 int	main(int argc, char **argv)
 {
 	t_screen	*screen;
@@ -96,7 +88,7 @@ int	main(int argc, char **argv)
 		error_exit("Can't allocate memory");
 	load_map(screen, argv[1]);
 	printpixels(screen);
-	drowpixels(screen, argv[1]);
+	drawpixels(screen, argv[1]);
 	freepixels(screen);
 	return (0);
 }

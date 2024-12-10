@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/06 18:39:52 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:19:33 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <string.h>
+# include <math.h>
 # include "libft/libft.h"
 
 # ifndef BUFFER_SIZE
@@ -64,5 +65,5 @@ void		freepixels(t_screen *screen);
 void		printpixels(t_screen *screen);
 int			close_window(int keycode, t_vars *vars);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void		drowpixels(t_screen *screen, char *title);
+void		drawpixels(t_screen *screen, char *title);
 #endif

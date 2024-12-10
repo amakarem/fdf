@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:12:30 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/06 19:44:50 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:19:26 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,59 @@ void	freepixels(t_screen *screen)
 	free(screen);
 }
 
+void	isometric_projection(int x, int y, int z, int *vhd)
+{
+	double	angle;
+	double	zoom;
+	double	x_offset;
+	double	y_offset;
+
+	angle = (M_PI / 4);
+	zoom = 4;
+	x_offset = 400;
+	y_offset = 300;
+	vhd[0] = (x - y) * cos(angle) * zoom + x_offset;
+	vhd[1] = ((x + y) * sin(angle) - z) * zoom + y_offset;
+}
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x >= 0 && x < 800 && y >= 0 && y < 600)
+	{
+		dst = data->addr
+			+ (y * data->line_length + x * (data->bits_per_pixel / 8));
+		*(unsigned int *)dst = color;
+	}
+}
+
+void	drawpixels(t_screen *screen, char *title)
+{
+	t_vars	vars;
+	t_pixel	*pix;
+	t_data	img;
+	int		vhd[2];
+
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, 800, 600, title);
+	img.img = mlx_new_image(vars.mlx, 800, 600);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
+			&img.line_length, &img.endian);
+	pix = screen->top;
+	while (pix)
+	{
+		isometric_projection(pix->v, pix->h, pix->set, vhd);
+		my_mlx_pixel_put(&img, vhd[0], vhd[1], pix->color);
+		pix = pix->next;
+	}
+	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	mlx_key_hook(vars.win, close_window, &vars);
+	mlx_hook(vars.win, 17, 0, close_window, &vars);
+	mlx_loop(vars.mlx);
+	freepixels(screen);
+}
+
 void	printpixels(t_screen *screen)
 {
 	t_pixel	*x;
@@ -76,29 +129,4 @@ void	printpixels(t_screen *screen)
 		printf("\nV:%i H:%i SET:%i COLOR:%d", x->v, x->h, x->set, x->color);
 		x = x->next;
 	}
-}
-
-void	drowpixels(t_screen *screen, char *title)
-{
-	t_vars	vars;
-	t_pixel	*pix;
-	t_data	img;
-
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, title);
-	img.img = mlx_new_image(vars.mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
-	pix = screen->top;
-	while (pix)
-	{
-		//mlx_pixel_put(&vars.mlx, vars.win, pix->v, pix->h, pix->color);
-		my_mlx_pixel_put(&img, pix->v, pix->h, 0x00FF0000);
-		mlx_put_image_to_window(vars.mlx, vars.win, img.img, pix->v, pix->h);
-		pix = pix->next;
-	}
-	mlx_key_hook(vars.win, close_window, &vars);
-	mlx_hook(vars.win, 17, 0, close_window, &vars);
-	mlx_loop(vars.mlx);
-	freepixels(screen);
 }
