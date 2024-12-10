@@ -6,42 +6,23 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:44:02 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/10 22:36:51 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 22:58:08 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	zoomsize(t_screen *screen)
-{
-	t_pixel	*x;
-	int		max;
-
-	x = screen->top;
-	max = 1;
-	while (x)
-	{
-		if (x->v > max)
-			max = x->v;
-		if (x->h > max)
-			max = x->h;
-		x = x->next;
-	}
-	if (SCREEN_WIDTH > SCREEN_HEIGHT)
-		return ((int)(SCREEN_WIDTH / 3 / max));
-	return ((int)(SCREEN_HEIGHT / 3 / max));
-}
-
 //isometric_projection
 void	iso(t_pixel *pix, int *vhd, t_screen *screen)
 {
-	double	angle;
-	double	zoom;
-	double	x_offset;
-	double	y_offset;
+	int	x_offset;
+	int	y_offset;
+	int	angle;
+	int	zoom;
 
 	angle = 210;
 	zoom = zoomsize(screen);
+	printf("\n ------------- %d ------------- \n", zoom);
 	x_offset = (int)(SCREEN_WIDTH / 2);
 	y_offset = (int)(SCREEN_HEIGHT / 2);
 	vhd[0] = (pix->v - pix->h) * cos(angle) * zoom + x_offset;
