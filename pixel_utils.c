@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:12:30 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/10 23:15:04 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 23:43:48 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,10 @@ void	printpixels(t_screen *screen)
 	while (x)
 	{
 		printf("\nV:%i H:%i SET:%i COLOR:%d", x->v, x->h, x->set, x->color);
+		if (x->next)
+			printf("-----H2:%i", x->next->h);
+		if (x->down)
+			printf("-----V2:%i", x->down->v);
 		x = x->next;
 	}
 }

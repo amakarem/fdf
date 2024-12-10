@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/10 23:04:21 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 23:44:17 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_screen
 {
 	t_pixel	*top;
 	int		size;
+	int		zoom;
 }	t_screen;
 
 typedef struct s_vars
