@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/10 18:19:38 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:06:27 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_screen	*load_map(t_screen *screen, char *filename)
 	}
 	free(line);
 	close(fd);
+	set_vertical_neighbors(screen);
 	return (screen);
 }
 

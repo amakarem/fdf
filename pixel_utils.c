@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:12:30 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/10 18:44:49 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:20:10 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,34 @@ t_screen	*init_screen(void)
 	return (screen);
 }
 
+void	set_vertical_neighbors(t_screen *screen)
+{
+	t_pixel	*current;
+	t_pixel	*down_pixel;
+	t_pixel	*row_start;
+
+	row_start = NULL;
+	if (!screen || screen->size == 0)
+		return ;
+	current = screen->top;
+	while (current != NULL)
+	{
+		if (row_start == NULL || current->v != row_start->v)
+			row_start = current;
+		down_pixel = current->next;
+		while (down_pixel != NULL)
+		{
+			if (down_pixel->h == current->h && down_pixel->v == current->v + 1)
+			{
+				current->down = down_pixel;
+				break ;
+			}
+			down_pixel = down_pixel->next;
+		}
+		current = current->next;
+	}
+}
+
 void	set_pixel(t_screen *screen, int v, int hset[2], int color)
 {
 	t_pixel	*new_pixel;
@@ -37,10 +65,9 @@ void	set_pixel(t_screen *screen, int v, int hset[2], int color)
 	new_pixel->set = hset[1];
 	new_pixel->color = color - 0;
 	if (!new_pixel->color)
-	{
 		return (free(new_pixel), free_and_exit("Memory error", screen));
-	}
 	new_pixel->next = NULL;
+	new_pixel->down = NULL;
 	if (screen->size == 0)
 		screen->top = new_pixel;
 	else

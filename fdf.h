@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/10 18:43:39 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:50:26 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # endif
 
 # ifndef SCREEN_WIDTH
-#  define SCREEN_WIDTH 600
+#  define SCREEN_WIDTH 580
 # endif
 
 # ifndef SCREEN_HEIGHT
@@ -40,6 +40,7 @@ typedef struct s_pixel
 	int				set;
 	int				color;
 	struct s_pixel	*next;
+	struct s_pixel	*down;
 }	t_pixel;
 
 typedef struct s_screen
@@ -69,6 +70,7 @@ void		free_and_exit(const char *msg, t_screen *scree);
 void		free_arr(char **str);
 t_screen	*init_screen(void);
 void		set_pixel(t_screen *screen, int v, int hset[2], int color);
+void		set_vertical_neighbors(t_screen *screen);
 void		freepixels(t_screen *screen);
 void		printpixels(t_screen *screen);
 int			close_window(int keycode, t_vars *vars);
