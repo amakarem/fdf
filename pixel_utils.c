@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:12:30 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/10 22:41:13 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 23:15:04 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	set_pixel(t_screen *screen, int v, int hset[2], int color)
 	new_pixel->v = v;
 	new_pixel->h = hset[0];
 	new_pixel->set = hset[1];
-	new_pixel->color = color - 0;
+	new_pixel->color = color;
 	if (!new_pixel->color)
 		return (free(new_pixel), free_and_exit("Memory error", screen));
 	new_pixel->next = NULL;
