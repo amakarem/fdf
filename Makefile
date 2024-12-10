@@ -6,7 +6,7 @@
 #    By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 16:56:17 by aelaaser          #+#    #+#              #
-#    Updated: 2024/12/05 23:01:13 by aelaaser         ###   ########.fr        #
+#    Updated: 2024/12/10 18:45:05 by aelaaser         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
 # Source files
-SRCS = exit_utils.c get_next_line.c pixel_utils.c fdf.c
+SRCS = exit_utils.c get_next_line.c pixel_utils.c draw.c fdf.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)
