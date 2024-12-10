@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/10 18:19:33 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:41:33 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
+# endif
+
+# ifndef SCREEN_WIDTH
+#  define SCREEN_WIDTH 600
+# endif
+
+# ifndef SCREEN_HEIGHT
+#  define SCREEN_HEIGHT 400
 # endif
 
 typedef struct s_pixel

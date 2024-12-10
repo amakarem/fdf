@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:12:30 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/10 18:19:26 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:40:17 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ void	isometric_projection(int x, int y, int z, int *vhd)
 	double	x_offset;
 	double	y_offset;
 
-	angle = (M_PI / 4);
-	zoom = 4;
-	x_offset = 400;
-	y_offset = 300;
+	angle = 210;
+	zoom = 8;
+	x_offset = (int)(SCREEN_WIDTH / 2);
+	y_offset = (int)(SCREEN_HEIGHT / 2);
 	vhd[0] = (x - y) * cos(angle) * zoom + x_offset;
 	vhd[1] = ((x + y) * sin(angle) - z) * zoom + y_offset;
 }
@@ -101,8 +101,8 @@ void	drawpixels(t_screen *screen, char *title)
 	int		vhd[2];
 
 	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 800, 600, title);
-	img.img = mlx_new_image(vars.mlx, 800, 600);
+	vars.win = mlx_new_window(vars.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, title);
+	img.img = mlx_new_image(vars.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
 	pix = screen->top;
