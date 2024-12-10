@@ -6,14 +6,34 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:44:02 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/10 19:55:05 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/10 22:36:51 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+int	zoomsize(t_screen *screen)
+{
+	t_pixel	*x;
+	int		max;
+
+	x = screen->top;
+	max = 1;
+	while (x)
+	{
+		if (x->v > max)
+			max = x->v;
+		if (x->h > max)
+			max = x->h;
+		x = x->next;
+	}
+	if (SCREEN_WIDTH > SCREEN_HEIGHT)
+		return ((int)(SCREEN_WIDTH / 3 / max));
+	return ((int)(SCREEN_HEIGHT / 3 / max));
+}
+
 //isometric_projection
-void	iso(int x, int y, int z, int *vhd)
+void	iso(t_pixel *pix, int *vhd, t_screen *screen)
 {
 	double	angle;
 	double	zoom;
@@ -21,11 +41,11 @@ void	iso(int x, int y, int z, int *vhd)
 	double	y_offset;
 
 	angle = 210;
-	zoom = 12;
+	zoom = zoomsize(screen);
 	x_offset = (int)(SCREEN_WIDTH / 2);
 	y_offset = (int)(SCREEN_HEIGHT / 2);
-	vhd[0] = (x - y) * cos(angle) * zoom + x_offset;
-	vhd[1] = ((x + y) * sin(angle) - z) * zoom + y_offset;
+	vhd[0] = (pix->v - pix->h) * cos(angle) * zoom + x_offset;
+	vhd[1] = ((pix->v + pix->h) * sin(angle) - pix->set) * zoom + y_offset;
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -94,16 +114,16 @@ void	drawpixels(t_screen *screen, char *title)
 	pix = screen->top;
 	while (pix)
 	{
-		iso(pix->v, pix->h, pix->set, vhd);
+		iso(pix, vhd, screen);
 		my_mlx_pixel_put(&img, vhd[0], vhd[1], pix->color);
 		if (pix->next)
 		{
-			iso(pix->next->v, pix->next->h, pix->next->set, vh_nxt);
+			iso(pix->next, vh_nxt, screen);
 			draw_line(&img, vhd, vh_nxt, pix->color);
 		}
 		if (pix->down)
 		{
-			iso(pix->down->v, pix->down->h, pix->down->set, vh_nxt);
+			iso(pix->down, vh_nxt, screen);
 			draw_line(&img, vhd, vh_nxt, pix->color);
 		}
 		pix = pix->next;
