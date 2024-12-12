@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 22:47:55 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/10 23:17:57 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:17:16 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	zoomsize(t_screen *screen)
 {
 	t_pixel	*x;
-	int		max;
 	int		max_v;
 	int		max_h;
 
@@ -30,13 +29,9 @@ int	zoomsize(t_screen *screen)
 			max_h = x->h;
 		x = x->next;
 	}
-	max = max_h;
-	if (max_v > max_h)
-		max = max_v;
-	printf("\n Max V:%d Max H:%d, Max:%d", max_v, max_h, max);
 	if (SCREEN_WIDTH > SCREEN_HEIGHT)
-		return ((int)(SCREEN_WIDTH / 3 / max));
-	return ((int)(SCREEN_HEIGHT / 3 / max));
+		return ((int)(SCREEN_WIDTH / ((max_v * max_h) / 2)));
+	return ((int)(SCREEN_HEIGHT / ((max_v * max_h) / 2)));
 }
 
 int	hex_to_int(const char *hex_str)
