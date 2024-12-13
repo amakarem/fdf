@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 22:47:55 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/12 16:17:16 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:54:48 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	zoomsize(t_screen *screen)
 		x = x->next;
 	}
 	if (SCREEN_WIDTH > SCREEN_HEIGHT)
-		return ((int)(SCREEN_WIDTH / ((max_v * max_h) / 2)));
-	return ((int)(SCREEN_HEIGHT / ((max_v * max_h) / 2)));
+		return ((int)(SCREEN_WIDTH / max_h) / 4);
+	return ((int)(SCREEN_HEIGHT / max_v) / 4);
 }
 
 int	hex_to_int(const char *hex_str)
