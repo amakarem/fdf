@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:44:02 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/13 16:04:34 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:33:19 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,12 @@ void	draw_lines_between_pixels(t_screen *screen, t_data *img)
 	while (pix)
 	{
 		iso(pix, vhd, screen);
-		if (pix->next)
+		if (pix->next && pix->v == pix->next->v)
 		{
 			iso(pix->next, vh_nxt, screen);
 			draw_line(img, vhd, vh_nxt, pix->color);
 		}
-		if (pix->down)
+		if (pix->down && pix->h == pix->down->h)
 		{
 			iso(pix->down, vh_nxt, screen);
 			draw_line(img, vhd, vh_nxt, pix->color);

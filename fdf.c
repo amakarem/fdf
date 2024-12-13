@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/10 23:46:18 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:14:03 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	main(int argc, char **argv)
 	if (!screen)
 		error_exit("Can't allocate memory");
 	load_map(screen, argv[1]);
-	printpixels(screen);
 	drawpixels(screen, argv[1]);
 	freepixels(screen);
 	return (0);
