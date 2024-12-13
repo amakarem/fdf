@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 22:47:55 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/13 15:54:48 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:26:32 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	zoomsize(t_screen *screen)
 	max_h = 1;
 	while (x)
 	{
-		if (x->v > max_v)
-			max_v = x->v;
-		if (x->h > max_h)
-			max_h = x->h;
+		if (x->y > max_v)
+			max_v = x->y;
+		if (x->x > max_h)
+			max_h = x->x;
 		x = x->next;
 	}
 	if (SCREEN_WIDTH > SCREEN_HEIGHT)

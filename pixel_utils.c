@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:12:30 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/13 16:15:51 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:50:36 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,16 @@ void	set_vertical_neighbors(t_screen *screen)
 {
 	t_pixel	*current;
 	t_pixel	*down_pixel;
-	t_pixel	*row_start;
 
-	row_start = NULL;
 	if (!screen || screen->size == 0)
 		return ;
 	current = screen->top;
 	while (current != NULL)
 	{
-		if (row_start == NULL || current->v != row_start->v)
-			row_start = current;
-		down_pixel = current->next;
+		down_pixel = screen->top;
 		while (down_pixel != NULL)
 		{
-			if (down_pixel->h == current->h && down_pixel->v == current->v + 1)
+			if (down_pixel->x == current->x && down_pixel->y == current->y + 1)
 			{
 				current->down = down_pixel;
 				break ;
@@ -51,7 +47,7 @@ void	set_vertical_neighbors(t_screen *screen)
 	}
 }
 
-void	set_pixel(t_screen *screen, int v, int hset[2], int color)
+void	set_pixel(t_screen *screen, int y, int hset[2], int color)
 {
 	t_pixel	*new_pixel;
 	t_pixel	*current;
@@ -59,9 +55,9 @@ void	set_pixel(t_screen *screen, int v, int hset[2], int color)
 	new_pixel = malloc(sizeof(t_pixel));
 	if (!new_pixel)
 		free_and_exit("Memory error", screen);
-	new_pixel->v = v;
-	new_pixel->h = hset[0];
-	new_pixel->set = hset[1];
+	new_pixel->y = y;
+	new_pixel->x = hset[0];
+	new_pixel->z = hset[1];
 	new_pixel->color = color;
 	if (!new_pixel->color)
 		return (free(new_pixel), free_and_exit("Memory error", screen));
@@ -99,11 +95,11 @@ void	printpixels(t_screen *screen)
 	x = screen->top;
 	while (x)
 	{
-		printf("\nV:%i H:%i SET:%i COLOR:%d", x->v, x->h, x->set, x->color);
+		printf("\nV:%i H:%i Z:%i COLOR:%d", x->y, x->x, x->z, x->color);
 		if (x->next)
-			printf("-----H2:%i", x->next->h);
+			printf("-----H2:%i", x->next->x);
 		if (x->down)
-			printf("-----V2:%i", x->down->v);
+			printf("-----V2:%i", x->down->y);
 		x = x->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/13 16:14:03 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:37:11 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-void	save_pixels(t_screen *screen, char *line, int v)
+void	save_pixels(t_screen *screen, char *line, int y)
 {
 	char	**arr;
 	char	**set;
@@ -29,9 +29,9 @@ void	save_pixels(t_screen *screen, char *line, int v)
 		set = ft_split(arr[i[0]], ',');
 		i[1] = ft_atoi(set[0]);
 		if (set[1])
-			set_pixel(screen, v, i, hex_to_int(set[1]));
+			set_pixel(screen, y, i, hex_to_int(set[1]));
 		else
-			set_pixel(screen, v, i, 0x90EE90);
+			set_pixel(screen, y, i, 0x90EE90);
 		i[0]++;
 		free_arr(set);
 		if (!screen)
@@ -89,6 +89,7 @@ int	main(int argc, char **argv)
 	if (!screen)
 		error_exit("Can't allocate memory");
 	load_map(screen, argv[1]);
+	printpixels(screen);
 	drawpixels(screen, argv[1]);
 	freepixels(screen);
 	return (0);

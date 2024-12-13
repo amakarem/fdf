@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/13 15:56:57 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:38:08 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@
 
 typedef struct s_pixel
 {
-	int				v;
-	int				h;
-	int				set;
+	int				x;
+	int				y;
+	int				z;
 	int				color;
 	struct s_pixel	*next;
 	struct s_pixel	*down;

@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:44:02 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/13 16:33:19 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:38:00 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ void	iso(t_pixel *pix, int *vhd, t_screen *screen)
 	double	angle;
 	int		zoom;
 
-	zoom = screen->zoom;
-	angle = -210 * M_PI / 180.0;
+	zoom = screen->zoom / 2;
+	angle = 30 * M_PI / 180.0;
+	angle = M_PI / 6;
 	x_offset = (int)(SCREEN_WIDTH / 2);
 	y_offset = (int)(SCREEN_HEIGHT / 2);
-	vhd[0] = (pix->v - pix->h) * cos(angle) * zoom + x_offset;
-	vhd[1] = ((pix->v + pix->h) * sin(angle) - pix->set) * zoom + y_offset;
+	vhd[0] = (pix->x - pix->y) * cos(angle) * zoom + x_offset;
+	vhd[1] = ((pix->x + pix->y) * sin(angle) - pix->z) * zoom + y_offset;
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -88,12 +89,12 @@ void	draw_lines_between_pixels(t_screen *screen, t_data *img)
 	while (pix)
 	{
 		iso(pix, vhd, screen);
-		if (pix->next && pix->v == pix->next->v)
+		if (pix->next && pix->y == pix->next->y)
 		{
 			iso(pix->next, vh_nxt, screen);
 			draw_line(img, vhd, vh_nxt, pix->color);
 		}
-		if (pix->down && pix->h == pix->down->h)
+		if (pix->down && pix->x == pix->down->x)
 		{
 			iso(pix->down, vh_nxt, screen);
 			draw_line(img, vhd, vh_nxt, pix->color);
