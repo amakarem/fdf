@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/13 19:38:08 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/16 20:01:04 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_pixel
 	int				z;
 	int				color;
 	struct s_pixel	*next;
-	struct s_pixel	*down;
 }	t_pixel;
 
 typedef struct s_screen
@@ -49,6 +48,7 @@ typedef struct s_screen
 	t_pixel	*top;
 	int		size;
 	int		zoom;
+	double	angle;
 }	t_screen;
 
 typedef struct s_vars
@@ -73,10 +73,10 @@ void		free_arr(char **str);
 t_screen	*init_screen(void);
 int			zoomsize(t_screen *screen);
 int			hex_to_int(const char *hex_str);
+void		iso(t_pixel *pix, int *vhd, t_screen *screen);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		set_pixel(t_screen *screen, int v, int hset[2], int color);
-void		set_vertical_neighbors(t_screen *screen);
 void		freepixels(t_screen *screen);
-void		printpixels(t_screen *screen);
 int			close_window(int keycode, t_vars *vars);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		drawpixels(t_screen *screen, char *title);

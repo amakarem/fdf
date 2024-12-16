@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/16 19:10:12 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:57:28 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	main(int argc, char **argv)
 	if (!screen)
 		error_exit("Can't allocate memory");
 	load_map(screen, argv[1]);
-	printpixels(screen);
+	screen->angle = M_PI / 6;
 	drawpixels(screen, argv[1]);
 	freepixels(screen);
 	return (0);
