@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:44:02 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/13 19:56:14 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:16:32 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	iso(t_pixel *pix, int *vhd, t_screen *screen)
 	int		zoom;
 
 	zoom = screen->zoom;
-	angle = 30 * M_PI / 180.0;
 	angle = M_PI / 6;
 	x_offset = (int)(SCREEN_WIDTH / 2);
 	y_offset = (int)(SCREEN_HEIGHT / 2);
@@ -82,6 +81,7 @@ void	draw_line(t_data *img, int *vhd, int *vh_nxt, int color)
 void	draw_lines_between_pixels(t_screen *screen, t_data *img)
 {
 	t_pixel	*pix;
+	t_pixel	*nextpix;
 	int		vhd[2];
 	int		vh_nxt[2];
 
@@ -89,15 +89,40 @@ void	draw_lines_between_pixels(t_screen *screen, t_data *img)
 	while (pix)
 	{
 		iso(pix, vhd, screen);
-		if (pix->next && pix->y == pix->next->y)
+		nextpix = screen->top;
+		while (nextpix)
 		{
-			iso(pix->next, vh_nxt, screen);
-			draw_line(img, vhd, vh_nxt, pix->color);
+			if (pix->x == nextpix->x && (nextpix->y - pix->y) == 1)
+			{
+				iso(nextpix, vh_nxt, screen);
+				draw_line(img, vhd, vh_nxt, pix->color);
+			}
+			nextpix = nextpix->next;
 		}
-		if (pix->down && pix->x == pix->down->x)
+		pix = pix->next;
+	}
+}
+
+void	draw_lines_between_pixels_v(t_screen *screen, t_data *img)
+{
+	t_pixel	*pix;
+	t_pixel	*nextpix;
+	int		vhd[2];
+	int		vh_nxt[2];
+
+	pix = screen->top;
+	while (pix)
+	{
+		iso(pix, vhd, screen);
+		nextpix = screen->top;
+		while (nextpix)
 		{
-			iso(pix->down, vh_nxt, screen);
-			draw_line(img, vhd, vh_nxt, pix->color);
+			if (pix->y == nextpix->y && (nextpix->x - pix->x) == 1)
+			{
+				iso(nextpix, vh_nxt, screen);
+				draw_line(img, vhd, vh_nxt, pix->color);
+			}
+			nextpix = nextpix->next;
 		}
 		pix = pix->next;
 	}
@@ -108,7 +133,7 @@ void	drawpixels(t_screen *screen, char *title)
 	t_vars	vars;
 	t_pixel	*pix;
 	t_data	img;
-	int		vhd[2];
+	//int		vhd[2];
 
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, title);
@@ -116,13 +141,14 @@ void	drawpixels(t_screen *screen, char *title)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
 	pix = screen->top;
-	while (pix)
-	{
-		iso(pix, vhd, screen);
-		my_mlx_pixel_put(&img, vhd[0], vhd[1], pix->color);
-		pix = pix->next;
-	}
+	// while (pix)
+	// {
+	// 	iso(pix, vhd, screen);
+	// 	my_mlx_pixel_put(&img, vhd[0], vhd[1], pix->color);
+	// 	pix = pix->next;
+	// }
 	draw_lines_between_pixels(screen, &img);
+	draw_lines_between_pixels_v(screen, &img);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_key_hook(vars.win, close_window, &vars);
 	mlx_hook(vars.win, 17, 0, close_window, &vars);

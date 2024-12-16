@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:12:30 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/13 19:50:36 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/16 18:45:52 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,29 @@ t_screen	*init_screen(void)
 	return (screen);
 }
 
-void	set_vertical_neighbors(t_screen *screen)
-{
-	t_pixel	*current;
-	t_pixel	*down_pixel;
+// void	set_vertical_neighbors(t_screen *screen)
+// {
+// 	t_pixel	*current;
+// 	t_pixel	*down_pixel;
 
-	if (!screen || screen->size == 0)
-		return ;
-	current = screen->top;
-	while (current != NULL)
-	{
-		down_pixel = screen->top;
-		while (down_pixel != NULL)
-		{
-			if (down_pixel->x == current->x && down_pixel->y == current->y + 1)
-			{
-				current->down = down_pixel;
-				break ;
-			}
-			down_pixel = down_pixel->next;
-		}
-		current = current->next;
-	}
-}
+// 	if (!screen || screen->size == 0)
+// 		return ;
+// 	current = screen->top;
+// 	while (current != NULL)
+// 	{
+// 		down_pixel = screen->top;
+// 		while (down_pixel != NULL)
+// 		{
+// 			if (down_pixel->x == current->x && down_pixel->y == current->y + 1)
+// 			{
+// 				current->down = down_pixel;
+// 				break ;
+// 			}
+// 			down_pixel = down_pixel->next;
+// 		}
+// 		current = current->next;
+// 	}
+// }
 
 void	set_pixel(t_screen *screen, int y, int hset[2], int color)
 {
