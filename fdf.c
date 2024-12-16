@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/16 20:15:53 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/16 21:04:33 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,15 @@ t_screen	*load_map(t_screen *screen, char *filename)
 
 int	close_window(int keycode, t_vars *vars)
 {
-	if (keycode == 53 || keycode == 17)
+	if (keycode == 53 || keycode == 17 || keycode < 0)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
+		if (keycode > 0)
+		{
+			freepixels(vars->screen);
+			mlx_destroy_window(vars->mlx, vars->win);
+		}
 		exit(0);
 	}
-	else if (keycode < 0)
-		exit(0);
 	return (0);
 }
 

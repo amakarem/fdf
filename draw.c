@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:44:02 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/16 20:00:09 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/16 20:24:13 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ void	draw_lines_between_pixels_h(t_screen *screen, t_data *img)
 void	drawpixels(t_screen *screen, char *title)
 {
 	t_vars	vars;
-	t_pixel	*pix;
 	t_data	img;
 
 	vars.mlx = mlx_init();
@@ -116,7 +115,7 @@ void	drawpixels(t_screen *screen, char *title)
 	img.img = mlx_new_image(vars.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
-	pix = screen->top;
+	vars.screen = screen;
 	draw_lines_between_pixels(screen, &img);
 	draw_lines_between_pixels_h(screen, &img);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
