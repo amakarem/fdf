@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 20:19:14 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 19:10:30 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:30:52 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	rotate(int keycode, t_vars *vars)
 	else if (keycode == 75)
 	{
 		vars->screen->angle = M_PI / 6;
-		vars->screen->zoom = zoomsize(vars->screen) / 2;
+		vars->screen->zoom = zoomsize(vars->screen);
 	}
 	drawimage(vars);
 }
