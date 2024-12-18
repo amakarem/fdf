@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:12:30 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 14:51:25 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:29:31 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_screen	*init_screen(void)
 	if (!screen)
 		return (NULL);
 	screen->top = NULL;
+	screen->angle = M_PI / 6;
 	return (screen);
 }
 
