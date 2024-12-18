@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 18:40:59 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:33:45 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct s_screen
 	t_pixel	*top;
 	int		size;
 	int		zoom;
+	int		x_offset;
+	int		y_offset;
 	double	angle;
 }	t_screen;
 

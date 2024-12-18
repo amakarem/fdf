@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 20:19:14 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 19:30:52 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:53:42 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,18 @@ void	zoominout(int keycode, t_vars *vars)
 
 void	rotate(int keycode, t_vars *vars)
 {
-	if (keycode == 124 || keycode == 125)
+	if (keycode == 1)
 		vars->screen->angle += 0.05;
-	else if (keycode == 123 || keycode == 126)
+	else if (keycode == 2)
 		vars->screen->angle -= 0.05;
+	else if (keycode == 124)
+		vars->screen->x_offset++;
+	else if (keycode == 123)
+		vars->screen->x_offset--;
+	else if (keycode == 126)
+		vars->screen->y_offset--;
+	else if (keycode == 125)
+		vars->screen->y_offset++;
 	else if (keycode == 75)
 	{
 		vars->screen->angle = M_PI / 6;
@@ -62,8 +70,8 @@ int	mouse_event(int button, int x, int y, t_vars *vars)
 	if (button == 2)
 		return (control(75, vars), 0);
 	if ((SCREEN_WIDTH / 2) - x > 0)
-		return (control(124, vars), 0);
+		return (rotate(2, vars), 0);
 	if ((SCREEN_WIDTH / 2) - x <= 0)
-		return (control(123, vars), 0);
+		return (rotate(1, vars), 0);
 	return (0);
 }

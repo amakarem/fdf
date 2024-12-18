@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 22:47:55 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 18:13:08 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:36:21 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	iso(t_pixel *pix, t_screen *screen)
 
 	zoom = screen->zoom;
 	angle = screen->angle;
-	x_offset = (int)(SCREEN_WIDTH / 2);
-	y_offset = (int)(SCREEN_HEIGHT / 2);
+	x_offset = screen->x_offset;
+	y_offset = screen->y_offset;
 	pix->iso.x = (pix->x - pix->y) * cos(angle) * zoom + x_offset;
 	pix->iso.y = ((pix->x + pix->y) * sin(angle) - pix->z) * zoom + y_offset;
 }
