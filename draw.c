@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:44:02 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/16 22:42:35 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:13:45 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,22 +105,14 @@ void	draw_lines_between_pixels_h(t_screen *screen, t_data *img)
 	}
 }
 
-void	drawpixels(t_screen *screen, char *title)
+void	drawimage(t_vars *vars)
 {
-	t_vars	vars;
 	t_data	img;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, title);
-	img.img = mlx_new_image(vars.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	img.img = mlx_new_image(vars->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
-	vars.screen = screen;
-	draw_lines_between_pixels(screen, &img);
-	draw_lines_between_pixels_h(screen, &img);
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-	mlx_key_hook(vars.win, close_window, &vars);
-	mlx_hook(vars.win, 17, 0, close_window, &vars);
-	mlx_loop(vars.mlx);
-	freepixels(screen);
+	draw_lines_between_pixels(vars->screen, &img);
+	draw_lines_between_pixels_h(vars->screen, &img);
+	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
 }
