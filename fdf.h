@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 17:23:10 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:25:54 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@
 
 typedef struct s_iso
 {
-    int x;
-    int y;
-}   t_iso;
+	int	x;
+	int	y;
+}	t_iso;
 
 typedef struct s_pixel
 {
