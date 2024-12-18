@@ -6,14 +6,14 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/16 20:24:10 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:33:01 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "mlx/mlx.h"
+# include "mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <errno.h>
