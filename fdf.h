@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 18:11:51 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:40:59 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		set_pixel(t_screen *screen, int v, int hset[2], int color);
 void		freepixels(t_screen *screen);
 int			control(int keycode, t_vars *vars);
+int			mouse_event(int button, int x, int y, t_vars *vars);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		drawimage(t_vars *vars);
 void		drawpixels(t_screen *screen, char *title);
