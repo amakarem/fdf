@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 15:13:56 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:16:53 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,6 @@ t_screen	*load_map(t_screen *screen, char *filename)
 	close(fd);
 	screen->zoom = zoomsize(screen) / 2;
 	return (screen);
-}
-
-int	close_window(int keycode, t_vars *vars)
-{
-	if (keycode == 53 || keycode == 17 || keycode < 0)
-	{
-		if (keycode > 0)
-		{
-			freepixels(vars->screen);
-			mlx_destroy_window(vars->mlx, vars->win);
-		}
-		exit(0);
-	}
-	else if (keycode == 69 || keycode == 78)
-		zoominout(keycode, vars);
-	return (0);
 }
 
 void	drawpixels(t_screen *screen, char *title)
