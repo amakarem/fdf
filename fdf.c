@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 18:41:17 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:17:18 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	drawpixels(t_screen *screen, char *title)
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, title);
 	vars.screen = screen;
+	mlx_clear_window(vars.mlx, vars.win);
+	mlx_do_sync(vars.mlx);
 	drawimage(&vars);
 	mlx_key_hook(vars.win, control, &vars);
 	mlx_mouse_hook(vars.win, mouse_event, &vars);
