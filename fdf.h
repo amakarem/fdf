@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 15:38:04 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:23:10 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,19 @@
 #  define SCREEN_HEIGHT 1080
 # endif
 
+typedef struct s_iso
+{
+    int x;
+    int y;
+}   t_iso;
+
 typedef struct s_pixel
 {
 	int				x;
 	int				y;
 	int				z;
 	int				color;
+	struct s_iso	iso;
 	struct s_pixel	*next;
 }	t_pixel;
 
@@ -78,7 +85,7 @@ void		iso(t_pixel *pix, int *vhd, t_screen *screen);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		set_pixel(t_screen *screen, int v, int hset[2], int color);
 void		freepixels(t_screen *screen);
-int			close_window(int keycode, t_vars *vars);
+int			control(int keycode, t_vars *vars);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		drawimage(t_vars *vars);
 void		drawpixels(t_screen *screen, char *title);

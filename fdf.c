@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:38:59 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 15:16:53 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:06:50 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ void	drawpixels(t_screen *screen, char *title)
 	vars.win = mlx_new_window(vars.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, title);
 	vars.screen = screen;
 	drawimage(&vars);
-	mlx_key_hook(vars.win, close_window, &vars);
-	mlx_hook(vars.win, 17, 0, close_window, &vars);
+	mlx_key_hook(vars.win, control, &vars);
+	mlx_mouse_hook(vars.win, control, &vars);
+	mlx_hook(vars.win, 17, 0, control, &vars);
 	mlx_loop(vars.mlx);
 	freepixels(screen);
 }
@@ -90,7 +91,6 @@ int	main(int argc, char **argv)
 	if (!screen)
 		error_exit("Can't allocate memory");
 	load_map(screen, argv[1]);
-	screen->angle = M_PI / 6;
 	drawpixels(screen, argv[1]);
 	freepixels(screen);
 	return (0);

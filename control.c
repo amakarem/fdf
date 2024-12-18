@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 20:19:14 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 15:32:30 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:21:02 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	zoominout(int keycode, t_vars *vars)
 {
-	if (keycode == 69)
+	if (keycode == 69 || keycode == 4)
 		vars->screen->zoom++;
-	else if (keycode == 78)
+	else if (keycode == 78 || keycode == 5)
 		vars->screen->zoom--;
 	drawimage(vars);
 }
 
 void	rotate(int keycode, t_vars *vars)
 {
-	if (keycode == 124)
-		vars->screen->angle++;
-	else if (keycode == 123)
-		vars->screen->angle--;
+	if (keycode == 124 || keycode == 1)
+		vars->screen->angle += 0.05;
+	else if (keycode == 123 || keycode == 2)
+		vars->screen->angle -= 0.05;
 	else if (keycode == 75)
 	{
 		vars->screen->angle = M_PI / 6;
@@ -35,7 +35,7 @@ void	rotate(int keycode, t_vars *vars)
 	drawimage(vars);
 }
 
-int	close_window(int keycode, t_vars *vars)
+int	control(int keycode, t_vars *vars)
 {
 	if (keycode == 53 || keycode == 17 || keycode < 0)
 	{
@@ -50,6 +50,10 @@ int	close_window(int keycode, t_vars *vars)
 		zoominout(keycode, vars);
 	else if (keycode == 124 || keycode == 123 || keycode == 75)
 		rotate(keycode, vars);
+	else if (keycode == 1 || keycode == 2)
+		printf("\n Rotate Mouse event:%d", keycode);
+	else if(keycode == 4 || keycode == 5)
+		printf("\n Zoom Mouse event:%d", keycode);
 	else
 		printf("\n %d", keycode);
 	return (0);
