@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 22:47:55 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/16 20:01:12 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:13:08 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	hex_to_int(const char *hex_str)
 }
 
 //isometric_projection
-void	iso(t_pixel *pix, int *vhd, t_screen *screen)
+void	iso(t_pixel *pix, t_screen *screen)
 {
 	int		x_offset;
 	int		y_offset;
@@ -75,8 +75,8 @@ void	iso(t_pixel *pix, int *vhd, t_screen *screen)
 	angle = screen->angle;
 	x_offset = (int)(SCREEN_WIDTH / 2);
 	y_offset = (int)(SCREEN_HEIGHT / 2);
-	vhd[0] = (pix->x - pix->y) * cos(angle) * zoom + x_offset;
-	vhd[1] = ((pix->x + pix->y) * sin(angle) - pix->z) * zoom + y_offset;
+	pix->iso.x = (pix->x - pix->y) * cos(angle) * zoom + x_offset;
+	pix->iso.y = ((pix->x + pix->y) * sin(angle) - pix->z) * zoom + y_offset;
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)

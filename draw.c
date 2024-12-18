@@ -6,21 +6,21 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:44:02 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 15:13:45 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:25:15 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	get_delta_values(int *vhd, int *vh_nxt, int *ds)
+void	get_delta_values(t_iso iso, t_iso iso_nxt, int *ds)
 {
-	ds[0] = abs(vh_nxt[0] - vhd[0]);
-	ds[1] = abs(vh_nxt[1] - vhd[1]);
+	ds[0] = abs(iso_nxt.x - iso.x);
+	ds[1] = abs(iso_nxt.y - iso.y);
 	ds[2] = -1;
-	if (vhd[0] < vh_nxt[0])
+	if (iso.x < iso_nxt.x)
 		ds[2] = 1;
 	ds[3] = -1;
-	if (vhd[1] < vh_nxt[1])
+	if (iso.y < iso_nxt.y)
 		ds[3] = 1;
 	ds[4] = ds[0] - ds[1];
 }
@@ -31,26 +31,26 @@ void	get_delta_values(int *vhd, int *vh_nxt, int *ds)
 // ds[3] sy
 // ds[4] err
 // ds[5] e2
-void	draw_line(t_data *img, int *vhd, int *vh_nxt, int color)
+void	draw_line(t_data *img, t_iso iso, t_iso iso_nxt, int color)
 {
 	int	ds[6];
 
-	get_delta_values(vhd, vh_nxt, ds);
+	get_delta_values(iso, iso_nxt, ds);
 	while (1)
 	{
-		my_mlx_pixel_put(img, vhd[0], vhd[1], color);
-		if (vhd[0] == vh_nxt[0] && vhd[1] == vh_nxt[1])
+		my_mlx_pixel_put(img, iso.x, iso.y, color);
+		if (iso.x == iso_nxt.x && iso.y == iso_nxt.y)
 			break ;
 		ds[5] = ds[4] * 2;
 		if (ds[5] > -ds[1])
 		{
 			ds[4] -= ds[1];
-			vhd[0] += ds[2];
+			iso.x += ds[2];
 		}
 		if (ds[5] < ds[0])
 		{
 			ds[4] += ds[0];
-			vhd[1] += ds[3];
+			iso.y += ds[3];
 		}
 	}
 }
@@ -59,46 +59,17 @@ void	draw_lines_between_pixels(t_screen *screen, t_data *img)
 {
 	t_pixel	*pix;
 	t_pixel	*nextpix;
-	int		vhd[2];
-	int		vh_nxt[2];
 
 	pix = screen->top;
 	while (pix)
 	{
-		iso(pix, vhd, screen);
 		nextpix = screen->top;
 		while (nextpix)
 		{
 			if (pix->x == nextpix->x && (nextpix->y - pix->y) == 1)
-			{
-				iso(nextpix, vh_nxt, screen);
-				draw_line(img, vhd, vh_nxt, pix->color);
-			}
-			nextpix = nextpix->next;
-		}
-		pix = pix->next;
-	}
-}
-
-void	draw_lines_between_pixels_h(t_screen *screen, t_data *img)
-{
-	t_pixel	*pix;
-	t_pixel	*nextpix;
-	int		vhd[2];
-	int		vh_nxt[2];
-
-	pix = screen->top;
-	while (pix)
-	{
-		iso(pix, vhd, screen);
-		nextpix = screen->top;
-		while (nextpix)
-		{
+				draw_line(img, pix->iso, nextpix->iso, pix->color);
 			if (pix->y == nextpix->y && (nextpix->x - pix->x) == 1)
-			{
-				iso(nextpix, vh_nxt, screen);
-				draw_line(img, vhd, vh_nxt, pix->color);
-			}
+				draw_line(img, pix->iso, nextpix->iso, pix->color);
 			nextpix = nextpix->next;
 		}
 		pix = pix->next;
@@ -112,7 +83,7 @@ void	drawimage(t_vars *vars)
 	img.img = mlx_new_image(vars->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
+	preprocess_iso(vars->screen);
 	draw_lines_between_pixels(vars->screen, &img);
-	draw_lines_between_pixels_h(vars->screen, &img);
 	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
 }

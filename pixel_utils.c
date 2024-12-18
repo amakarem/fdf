@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:12:30 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 17:29:31 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:15:26 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,16 @@ void	freepixels(t_screen *screen)
 		free(tmp);
 	}
 	free(screen);
+}
+
+void	preprocess_iso(t_screen *screen)
+{
+	t_pixel	*pix;
+
+	pix = screen->top;
+	while (pix)
+	{
+		iso(pix, screen);
+		pix = pix->next;
+	}
 }

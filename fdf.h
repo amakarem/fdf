@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:03:31 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 17:29:48 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:11:51 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void		free_arr(char **str);
 t_screen	*init_screen(void);
 int			zoomsize(t_screen *screen);
 int			hex_to_int(const char *hex_str);
-void		iso(t_pixel *pix, int *vhd, t_screen *screen);
+void		iso(t_pixel *pix, t_screen *screen);
+void		preprocess_iso(t_screen *screen);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		set_pixel(t_screen *screen, int v, int hset[2], int color);
 void		freepixels(t_screen *screen);
