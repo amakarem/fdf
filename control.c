@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 20:19:14 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 17:24:18 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:01:04 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	zoominout(int keycode, t_vars *vars)
 
 void	rotate(int keycode, t_vars *vars)
 {
-	if (keycode == 124 || keycode == 1)
+	if (keycode == 124 || keycode == 125)
 		vars->screen->angle += 0.05;
-	else if (keycode == 123 || keycode == 2)
+	else if (keycode == 123 || keycode == 126)
 		vars->screen->angle -= 0.05;
 	else if (keycode == 75)
 	{
@@ -48,7 +48,7 @@ int	control(int keycode, t_vars *vars)
 	}
 	else if (keycode == 69 || keycode == 78)
 		zoominout(keycode, vars);
-	else if (keycode == 124 || keycode == 123 || keycode == 75)
+	else if ((keycode >= 123 && keycode <= 126) || keycode == 75)
 		rotate(keycode, vars);
 	else if (keycode == 1 || keycode == 2)
 		printf("\n Rotate Mouse event:%d", keycode);
