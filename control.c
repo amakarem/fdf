@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 20:19:14 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 16:21:02 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:24:18 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	control(int keycode, t_vars *vars)
 		rotate(keycode, vars);
 	else if (keycode == 1 || keycode == 2)
 		printf("\n Rotate Mouse event:%d", keycode);
-	else if(keycode == 4 || keycode == 5)
+	else if (keycode == 4 || keycode == 5)
 		printf("\n Zoom Mouse event:%d", keycode);
 	else
 		printf("\n %d", keycode);
