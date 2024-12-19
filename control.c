@@ -6,11 +6,20 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 20:19:14 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 19:53:42 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:20:29 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	projection_switch(t_vars *vars)
+{
+	if (vars->screen->projection == 1)
+		vars->screen->projection = 0;
+	else
+		vars->screen->projection = 1;
+	drawimage(vars);
+}
 
 void	zoominout(int keycode, t_vars *vars)
 {
@@ -38,6 +47,7 @@ void	rotate(int keycode, t_vars *vars)
 	else if (keycode == 75)
 	{
 		vars->screen->angle = M_PI / 6;
+		vars->screen->projection = 0;
 		vars->screen->zoom = zoomsize(vars->screen);
 	}
 	drawimage(vars);
@@ -58,6 +68,8 @@ int	control(int keycode, t_vars *vars)
 		zoominout(keycode, vars);
 	else if ((keycode >= 123 && keycode <= 126) || keycode == 75)
 		rotate(keycode, vars);
+	else if (keycode == 35)
+		projection_switch(vars);
 	return (0);
 }
 

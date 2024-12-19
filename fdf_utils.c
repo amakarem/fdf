@@ -6,7 +6,7 @@
 /*   By: aelaaser <aelaaser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 22:47:55 by aelaaser          #+#    #+#             */
-/*   Updated: 2024/12/18 19:36:21 by aelaaser         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:23:18 by aelaaser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	hex_to_int(const char *hex_str)
 	return (result);
 }
 
-//isometric_projection
+//isometric_projection && Cavalier Projection when type = 1 switch by press p
 void	iso(t_pixel *pix, t_screen *screen)
 {
 	int		x_offset;
@@ -77,6 +77,13 @@ void	iso(t_pixel *pix, t_screen *screen)
 	y_offset = screen->y_offset;
 	pix->iso.x = (pix->x - pix->y) * cos(angle) * zoom + x_offset;
 	pix->iso.y = ((pix->x + pix->y) * sin(angle) - pix->z) * zoom + y_offset;
+	if (screen->projection == 1)
+	{
+		pix->iso.x = (pix->x - pix->y) * cos(angle) * zoom
+			+ pix->z * zoom + x_offset;
+		pix->iso.y = (pix->x + pix->y) * sin(angle) * zoom
+			+ pix->z * zoom + y_offset;
+	}
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
